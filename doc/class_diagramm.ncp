@@ -39,7 +39,7 @@
         <Member type="Field">long type_id</Member>
         <Member type="Field">long model_id</Member>
         <Member type="Field">long power</Member>
-        <Member type="Field">int year_of_manufacture</Member>
+        <Member type="Field">long year_of_manufacture</Member>
         <Member type="Field">long speed</Member>
         <Modifier>None</Modifier>
       </Entity>
@@ -90,7 +90,7 @@
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">long user_id</Member>
-        <Member type="Field">long car_id</Member>
+        <Member type="Field">long order_id</Member>
         <Modifier>None</Modifier>
       </Entity>
     </Entities>

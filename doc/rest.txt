@@ -1,24 +1,6 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-GET /get_cars
-
-RESPONSE:
-[
-{
-	"model":              "Audi rs6",
-	"type":               "sedan",
-	"year_of_manufaktur":  2016,
-	"color":              "red",
-	"power":               1000,
-	"speed":               400,
-	"price":               100
-}
-]
-
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-GET /find_cars/page:/1/order_by:/price/order:/ascending/model:/Audi/max_price:/10000000
+GET /find_cars/{page}/{order_by}/{order}/{model}/{max_price}/{min_price}
 
 RESPONSE:
 [
@@ -93,6 +75,16 @@ REQUEST:
 {
 	"product_number": 0
 }
+
+RESPONSE:
+
+{
+	"status": "Ok"
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+GET /confirm_purchase
 
 RESPONSE:
 
