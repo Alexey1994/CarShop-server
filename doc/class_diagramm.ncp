@@ -46,7 +46,7 @@
       <Entity type="Class">
         <Name>Colors</Name>
         <Access>Public</Access>
-        <Location left="769" top="420" />
+        <Location left="785" top="420" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">long id</Member>
@@ -66,7 +66,7 @@
       <Entity type="Class">
         <Name>CarModels</Name>
         <Access>Public</Access>
-        <Location left="659" top="734" />
+        <Location left="785" top="734" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">long id</Member>
@@ -81,6 +81,16 @@
         <Collapsed>False</Collapsed>
         <Member type="Field">int id</Member>
         <Member type="Field">long order_id</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Cart</Name>
+        <Access>Public</Access>
+        <Location left="101" top="420" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">long user_id</Member>
+        <Member type="Field">long car_id</Member>
         <Modifier>None</Modifier>
       </Entity>
     </Entities>
@@ -130,6 +140,14 @@
         </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="7" second="0">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>

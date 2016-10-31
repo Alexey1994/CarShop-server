@@ -57,3 +57,10 @@ CREATE TABLE CarShop.CarModels
 	id    LONG,
 	model VARCHAR(255)
 );
+
+
+CREATE TABLE CarShop.Cart
+(
+	user_id LONG,
+	car_id  LONG
+);
