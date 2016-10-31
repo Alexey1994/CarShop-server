@@ -1,22 +1,5 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-GET /find_cars/{page}/{order_by}/{order}/{model}/{max_price}/{min_price}
-
-RESPONSE:
-[
-{
-	"model":              "Audi rs6",
-	"type":               "sedan",
-	"year_of_manufaktur":  2016,
-	"color":              "red",
-	"power":               1000,
-	"speed":               400,
-	"price":               100
-}
-]
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 POST /login
 
 REQUEST:
@@ -52,12 +35,53 @@ RESPONSE:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+GET /find_cars/{page}/{order_by}/{order}/{model}/{max_price}/{min_price}
+
+RESPONSE:
+[
+{
+	"model":              "Audi rs6",
+	"type":               "sedan",
+	"year_of_manufaktur":  2016,
+	"color":              "red",
+	"power":               1000,
+	"speed":               400,
+	"price":               100
+}
+]
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+POST /get_cart
+
+RESPONSE:
+
+[
+{
+	"model":              "Audi rs6",
+	"type":               "sedan",
+	"year_of_manufaktur":  2016,
+	"color":              "red",
+	"power":               1000,
+	"speed":               400,
+	"price":               100
+}
+]
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 POST /add_product_to_cart
 
 REQUEST:
 
 {
-	"product_id": 1251
+	"model":              "Audi rs6",
+	"type":               "sedan",
+	"year_of_manufaktur":  2016,
+	"color":              "red",
+	"power":               1000,
+	"speed":               400,
+	"price":               100
 }
 
 RESPONSE:
