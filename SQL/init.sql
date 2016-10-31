@@ -5,17 +5,17 @@ CREATE TABLE CarShop.Users
 (
 	id       LONG,
 	role     VARCHAR(10),
-    login    VARCHAR(255),
-    password VARCHAR(255)
+	login    VARCHAR(255),
+	password VARCHAR(255)
 );
 
 
 CREATE TABLE CarShop.Orders
 (
 	id          LONG,
-    car_id      LONG,
-    customer_id LONG,
-    order_date  DATE
+	car_id      LONG,
+	customer_id LONG,
+	order_date  DATE
 );
 
 
@@ -30,7 +30,7 @@ CREATE TABLE CarShop.Cars
 (
 	id                  LONG,
 	color_id            LONG,
-    type_id             LONG,
+	type_id             LONG,
     model_id            LONG,
     power               LONG,
     year_of_manufacture INT,
