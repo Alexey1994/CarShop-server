@@ -26,21 +26,24 @@
         <Member type="Field">long car_id</Member>
         <Member type="Field">long customer_id</Member>
         <Member type="Field">Date order_date</Member>
+        <Member type="Field">String status</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>Cars</Name>
         <Access>Public</Access>
         <Location left="460" top="420" />
-        <Size width="162" height="216" />
+        <Size width="162" height="230" />
         <Collapsed>False</Collapsed>
         <Member type="Field">long id</Member>
-        <Member type="Field">long color_id</Member>
         <Member type="Field">long type_id</Member>
         <Member type="Field">long model_id</Member>
+        <Member type="Field">long color_id</Member>
         <Member type="Field">long power</Member>
-        <Member type="Field">long year_of_manufacture</Member>
         <Member type="Field">long speed</Member>
+        <Member type="Field">long price</Member>
+        <Member type="Field">long year_of_manufacture</Member>
+        <Member type="Field">String image</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
@@ -56,17 +59,18 @@
       <Entity type="Class">
         <Name>CarTypes</Name>
         <Access>Public</Access>
-        <Location left="460" top="734" />
+        <Location left="101" top="813" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">long id</Member>
         <Member type="Field">String type</Member>
+        <Member type="Field">int model_id</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>CarModels</Name>
         <Access>Public</Access>
-        <Location left="785" top="734" />
+        <Location left="460" top="813" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">long id</Member>
@@ -89,8 +93,9 @@
         <Location left="101" top="420" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
+        <Member type="Field">long id</Member>
         <Member type="Field">long user_id</Member>
-        <Member type="Field">long order_id</Member>
+        <Member type="Field">long car_id</Member>
         <Modifier>None</Modifier>
       </Entity>
     </Entities>
@@ -100,14 +105,6 @@
         </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
-        <Direction>Unidirectional</Direction>
-        <AssociationType>Association</AssociationType>
-      </Relationship>
-      <Relationship type="Association" first="4" second="2">
-        <Label>
-        </Label>
-        <StartOrientation>Vertical</StartOrientation>
-        <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
@@ -148,6 +145,14 @@
         </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="4" second="5">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>

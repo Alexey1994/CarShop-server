@@ -15,7 +15,8 @@ CREATE TABLE CarShop.Orders
 	id          LONG,
 	car_id      LONG,
 	customer_id LONG,
-	order_date  DATE
+	order_date  DATE,
+    status      VARCHAR(10)
 );
 
 
@@ -29,12 +30,13 @@ CREATE TABLE CarShop.Sales
 CREATE TABLE CarShop.Cars
 (
 	id                  LONG,
-	color_id            LONG,
 	type_id             LONG,
 	model_id            LONG,
+    color_id            LONG,
 	power               LONG,
-	year_of_manufacture INT,
-	speed               LONG
+    speed               LONG,
+	year_of_manufacture LONG,
+	image               VARCHAR(255)
 );
 
 
@@ -61,6 +63,7 @@ CREATE TABLE CarShop.CarModels
 
 CREATE TABLE CarShop.Cart
 (
+	id      LONG,
 	user_id LONG,
 	car_id  LONG
 );
