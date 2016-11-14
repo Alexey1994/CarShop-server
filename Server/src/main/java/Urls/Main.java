@@ -1,4 +1,6 @@
-import CarShop.Models.CarShop;
+package Urls;
+
+import CarShop.Models.*;
 import org.restlet.*;
 import org.restlet.data.*;
 import org.restlet.resource.*;

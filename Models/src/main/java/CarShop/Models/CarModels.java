@@ -72,8 +72,6 @@ public class CarModels {
 
 
     public String toString() {
-        return "{" +
-                "\"model\":\"" + this.model +
-                "\"}";
+        return this.model;
     }
 }

@@ -11,8 +11,9 @@ public class CarTypes {
     private static volatile long nextId = 0;
 
     @Id
-    private long id;
+    private long   id;
     private String type;
+    private long   model_id;
 
 
     private static long generateId() {
@@ -53,6 +54,8 @@ public class CarTypes {
 
 
     public long getId() { return this.id; }
+    public void setModelId(long modelId){ this.model_id = modelId; }
+    public long getModelId(){ return this.model_id; }
     public void setType(String type){ this.type = type; }
     public String getType() {
         return this.type;
@@ -67,5 +70,10 @@ public class CarTypes {
     public CarTypes(String type){
         this.id = generateId();
         this.type = type;
+    }
+
+
+    public String toString(){
+        return this.type;
     }
 }
