@@ -1,6 +1,7 @@
 package Controllers.Cars;
 
 import CarShop.Models.*;
+import CarShop.Models.Implementation.Cars;
 import org.json.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,9 +19,9 @@ public class Finder extends ServerResource {
     private final int numPagesOnPage = 5;
 
     @Post("txt")
-    public String toString(Representation exams) throws IOException, ParseException {
+    public String toString(Representation params) throws IOException, ParseException {
         JSONParser parser     = new JSONParser();
-        JSONObject in         = (JSONObject) parser.parse(exams.getText());
+        JSONObject in         = (JSONObject) parser.parse(params.getText());
         JSONObject object     = new JSONObject();
         JSONObject result     = new JSONObject();
         JSONArray  objects    = new JSONArray();
@@ -32,7 +33,7 @@ public class Finder extends ServerResource {
         String     order     = (String)in.get("order");
         String     model     = (String)in.get("model");
 
-        Cars       car;
+        CarsDAO    car;
         List       cars;
 
         try{
@@ -59,12 +60,11 @@ public class Finder extends ServerResource {
         ids[0] = 0;
         ids[1] = 1;
 
-        cars = Cars.findCars(ids, ids, ids, 0, 1000, 0, 1000, minPrice, maxPrice);
+        cars = new Cars().findCars(numPagesOnPage, ids, ids, ids, 0, 1000, 0, 1000, minPrice, maxPrice, 0, 2016);
 
         for(int i=(int)page * numPagesOnPage; i<cars.size(); i++) {
             car = (Cars)cars.get(i);
             object = (JSONObject) parser.parse(car.toString());
-
             objects.add(object);
         }
 

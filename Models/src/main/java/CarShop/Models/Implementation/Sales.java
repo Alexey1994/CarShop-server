@@ -1,19 +1,22 @@
-package CarShop.Models;
+package CarShop.Models.Implementation;
 
+import CarShop.Models.*;
+import CarShop.Models.DataBase;
 import org.hibernate.*;
 import org.hibernate.Query;
+
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.List;
 
 
 @Entity
-public class CarTypes {
+public class Sales {
     private static volatile long nextId = 0;
 
     @Id
-    private long   id;
-    private String type;
-    private long   model_id;
+    private long id;
+    private long order_id;
 
 
     private static long generateId() {
@@ -24,18 +27,18 @@ public class CarTypes {
         }
 
         Session session = DataBase.getSession();
-        Query query = session.createQuery("SELECT id FROM CarTypes");
+        Query query = session.createQuery("SELECT id FROM Sales");
         List ids = query.list();
         Long maxId = null;
 
         if (ids.size() > 0)
             maxId = (Long) ids.get(ids.size() - 1);
-
-        if (maxId == null) {
+        else
+        {
             nextId++;
             return nextId;
         }
-
+        System.out.println(maxId);
         nextId = maxId.longValue() + 1;
 
         return nextId;
@@ -53,27 +56,25 @@ public class CarTypes {
     }
 
 
-    public long getId() { return this.id; }
-    public void setModelId(long modelId){ this.model_id = modelId; }
-    public long getModelId(){ return this.model_id; }
-    public void setType(String type){ this.type = type; }
-    public String getType() {
-        return this.type;
-    }
+    public long getId(){ return this.id; }
+    public void setOrderId(long orderId){ this.order_id = orderId; }
+    public long getOrderId(){ return this.order_id; }
 
 
-    public CarTypes(){
+    public Sales(){
         this.id = generateId();
     }
 
 
-    public CarTypes(String type){
-        this.id = generateId();
-        this.type = type;
+    public Sales(long orderId){
+        this.id       = generateId();
+        this.order_id = orderId;
     }
 
 
     public String toString(){
-        return this.type;
+        return  "{" +
+                "\"order_id\":" + this.order_id +
+                "}";
     }
 }

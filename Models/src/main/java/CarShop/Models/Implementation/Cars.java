@@ -1,5 +1,7 @@
-package CarShop.Models;
+package CarShop.Models.Implementation;
 
+import CarShop.Models.DAO.*;
+import CarShop.Models.DataBase;
 import org.hibernate.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -66,18 +68,18 @@ class Finder {
 
 
 @Entity
-public class Cars {
+public class Cars implements CarsDAO {
     private static volatile long nextId = 0;
 
     @Id
     private long   id;
-    private long   type_id;
+    private long   brand_id;
     private long   model_id;
     private long   color_id;
     private long   power;
     private long   speed;
+    private long   price;
     private long   year_of_manufacture;
-    private String image;
 
 
     private static long generateId() {
@@ -106,15 +108,18 @@ public class Cars {
     }
 
 
-    public static List findCars(long colorIds[],
-                                long typeIds[],
-                                long modelIds[],
-                                long powerMin,
-                                long powerMax,
-                                long speedMin,
-                                long speedMax,
-                                long yearOfManufactureMin,
-                                long yearOfManufactureMax) {
+    public List findCars(int  maxResults,
+                         long colorIds[],
+                         long brandIds[],
+                         long modelIds[],
+                         long powerMin,
+                         long powerMax,
+                         long speedMin,
+                         long speedMax,
+                         long priceMin,
+                         long priceMax,
+                         long yearOfManufactureMin,
+                         long yearOfManufactureMax) {
 
         Session session = DataBase.getSession();
         Finder finder = new Finder("FROM Cars ");
@@ -122,16 +127,18 @@ public class Cars {
         Query dbQuery;
         List cars;
 
-        finder.addArrayParametersFilter("type_id", typeIds);
+        finder.addArrayParametersFilter("brand_id", brandIds);
         finder.addArrayParametersFilter("model_id", modelIds);
         finder.addArrayParametersFilter("color_id", colorIds);
         finder.addRangedParameterFilter("power", powerMin, powerMax);
         finder.addRangedParameterFilter("speed", speedMin, speedMax);
+        finder.addRangedParameterFilter("price", priceMin, priceMax);
         finder.addRangedParameterFilter("year_of_manufacture", yearOfManufactureMin, yearOfManufactureMax);
 
         finderQuery = finder.getQuery();
 
         dbQuery = session.createQuery(finderQuery);
+        dbQuery.setMaxResults(5);
         cars = dbQuery.list();
         session.close();
 
@@ -150,19 +157,18 @@ public class Cars {
     }
 
 
-    public static void delete(long id) {
-        Cars car = Cars.get(id);
+    public void delete() {
         Session session = DataBase.getSession();
         Transaction transaction = session.getTransaction();
 
         transaction.begin();
-        session.delete(car);
+        session.delete(this);
         transaction.commit();
         session.close();
     }
 
 
-    public static Cars get(long id) {
+    public Cars get(long id) {
         Session session = DataBase.getSession();
         Query query = session.createQuery("FROM Cars WHERE id=" + id);
         List cars = query.list();
@@ -178,24 +184,20 @@ public class Cars {
 
 
     public Cars() {
-        //this.id = this.nextId;
-        //this.nextId++;
         this.id = generateId();
     }
 
 
-    public Cars(long typeId, long modelId, long colorId, long power, long speed, long yearOfManufacture, String image) {
-        //this.id = this.nextId;
-        //this.nextId++;
+    public Cars(long brandId, long modelId, long colorId, long power, long speed, long price, long yearOfManufacture) {
         this.id = generateId();
 
-        this.type_id             = typeId;
+        this.brand_id            = brandId;
         this.model_id            = modelId;
         this.color_id            = colorId;
         this.power               = power;
         this.speed               = speed;
+        this.price               = price;
         this.year_of_manufacture = yearOfManufacture;
-        this.image               = image;
     }
 
 
@@ -208,11 +210,11 @@ public class Cars {
     public long getColorId() {
         return this.color_id;
     }
-    public void setTypeId(long typeId) {
-        this.type_id = typeId;
+    public void setBrandId(long brandId) {
+        this.brand_id = brandId;
     }
-    public long getTypeId() {
-        return this.type_id;
+    public long getBrandId() {
+        return this.brand_id;
     }
     public void setModelId(long modelId) {
         this.model_id = modelId;
@@ -226,32 +228,64 @@ public class Cars {
     public void setPower(long power) {
         this.power = power;
     }
-    public void setYearOfManufacture(long yearOfManufacture) {
-        this.year_of_manufacture = yearOfManufacture;
-    }
-    public long getYearOfManufacture(long yearOfManufacture) {
-        return this.year_of_manufacture;
-    }
     public void setSpeed(long speed) {
         this.speed = speed;
     }
     public long getSpeed() {
         return this.speed;
     }
-    public void setImage(String image){ this.image = image; }
-    public String getImage(){ return this.image; }
+    public void setPrice(long price) {
+        this.price = price;
+    }
+    public long getPrice() {
+        return this.price;
+    }
+    public void setYearOfManufacture(long yearOfManufacture) {
+        this.year_of_manufacture = yearOfManufacture;
+    }
+    public long getYearOfManufacture(long yearOfManufacture) {
+        return this.year_of_manufacture;
+    }
 
 
     public String toString() {
+        List         images = new CarImages().getImages(this.id);
+        String       imagesString = "[";
+        CarBrandsDAO brand        = new CarBrands().get(this.brand_id);
+        CarModelsDAO model        = new CarModels().get(this.model_id);
+        ColorsDAO color        = new Colors().get(this.color_id);
+        String       brandString  = "-";
+        String       modelString  = "-";
+        String       colorString  = "-";
+        CarImagesDAO image;
+
+        for(int i=0; i<images.size() - 1; i++)
+            imagesString += "\"" + images.get(i) + "\",";
+
+        if(images.size() > 0)
+            imagesString += "\"" + images.get(images.size() - 1) + "\"";
+
+        imagesString += "]";
+
+        if(brand != null)
+            brandString = brand.toString();
+
+        if(model != null)
+            modelString = model.toString();
+
+        if(color != null)
+            colorString = color.toString();
+
         return "{" +
                 "\"id\":" + this.id + "," +
-                "\"type_id\":" + this.type_id + "," +
-                "\"model_id\":" + this.model_id + "," +
-                "\"color_id\":" + this.color_id + "," +
+                "\"brand\":\"" + brandString + "\"," +
+                "\"model\":\"" + modelString + "\"," +
+                "\"color\":\"" + colorString + "\"," +
                 "\"power\":" + this.power + "," +
                 "\"speed\":" + this.speed + "," +
-                "\"year_of_manufacture\":" + this.year_of_manufacture + "," +
-                "\"image\":\"" + this.image +
-                "\"}";
+                "\"price\":" + this.price + "," +
+                "\"images\":" + imagesString + "," +
+                "\"year_of_manufacture\":" + this.year_of_manufacture +
+                "}";
     }
 }

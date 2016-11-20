@@ -7,11 +7,11 @@
       <Entity type="Class">
         <Name>Users</Name>
         <Access>Public</Access>
-        <Location left="101" top="141" />
+        <Location left="282" top="443" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">long id</Member>
-        <Member type="Field">String role</Member>
+        <Member type="Field">long role_id</Member>
         <Member type="Field">String login</Member>
         <Member type="Field">String password</Member>
         <Modifier>None</Modifier>
@@ -19,37 +19,36 @@
       <Entity type="Class">
         <Name>Orders</Name>
         <Access>Public</Access>
-        <Location left="460" top="141" />
+        <Location left="533" top="443" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">long id</Member>
         <Member type="Field">long car_id</Member>
         <Member type="Field">long customer_id</Member>
         <Member type="Field">Date order_date</Member>
-        <Member type="Field">String status</Member>
+        <Member type="Field">long status_id</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>Cars</Name>
         <Access>Public</Access>
-        <Location left="460" top="420" />
+        <Location left="533" top="727" />
         <Size width="162" height="230" />
         <Collapsed>False</Collapsed>
         <Member type="Field">long id</Member>
-        <Member type="Field">long type_id</Member>
+        <Member type="Field">long brand_id</Member>
         <Member type="Field">long model_id</Member>
         <Member type="Field">long color_id</Member>
         <Member type="Field">long power</Member>
         <Member type="Field">long speed</Member>
         <Member type="Field">long price</Member>
         <Member type="Field">long year_of_manufacture</Member>
-        <Member type="Field">String image</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>Colors</Name>
         <Access>Public</Access>
-        <Location left="785" top="420" />
+        <Location left="770" top="727" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">long id</Member>
@@ -57,30 +56,30 @@
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
-        <Name>CarTypes</Name>
+        <Name>CarModels</Name>
         <Access>Public</Access>
-        <Location left="101" top="813" />
+        <Location left="533" top="1278" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">long id</Member>
-        <Member type="Field">String type</Member>
-        <Member type="Field">int model_id</Member>
+        <Member type="Field">int brand_id</Member>
+        <Member type="Field">String model</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
-        <Name>CarModels</Name>
+        <Name>CarBrands</Name>
         <Access>Public</Access>
-        <Location left="460" top="813" />
+        <Location left="533" top="1008" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">long id</Member>
-        <Member type="Field">String model</Member>
+        <Member type="Field">String brand</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>Sales</Name>
         <Access>Public</Access>
-        <Location left="785" top="141" />
+        <Location left="770" top="443" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">int id</Member>
@@ -90,7 +89,7 @@
       <Entity type="Class">
         <Name>Cart</Name>
         <Access>Public</Access>
-        <Location left="101" top="420" />
+        <Location left="282" top="136" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">long id</Member>
@@ -98,33 +97,84 @@
         <Member type="Field">long car_id</Member>
         <Modifier>None</Modifier>
       </Entity>
+      <Entity type="Class">
+        <Name>Roles</Name>
+        <Access>Public</Access>
+        <Location left="33" top="443" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">long id</Member>
+        <Member type="Field">String role</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>OrderStatuses</Name>
+        <Access>Public</Access>
+        <Location left="533" top="136" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">long id</Member>
+        <Member type="Field">String status</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CarImages</Name>
+        <Access>Public</Access>
+        <Location left="282" top="727" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">long id</Member>
+        <Member type="Field">long car_id</Member>
+        <Member type="Field">String image</Member>
+        <Modifier>None</Modifier>
+      </Entity>
     </Entities>
     <Relationships>
       <Relationship type="Association" first="3" second="2">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="5" second="2">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="1">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="1" second="0">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="1" second="6">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="4" second="5">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>613</X>
+          <Y>1253</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>613</X>
+          <Y>1249</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="8" second="0">
         <Label>
         </Label>
         <StartOrientation>Horizontal</StartOrientation>
@@ -132,7 +182,15 @@
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
-      <Relationship type="Association" first="1" second="6">
+      <Relationship type="Association" first="9" second="1">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="10" second="2">
         <Label>
         </Label>
         <StartOrientation>Horizontal</StartOrientation>
@@ -145,14 +203,10 @@
         </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
-        <Direction>Unidirectional</Direction>
-        <AssociationType>Association</AssociationType>
-      </Relationship>
-      <Relationship type="Association" first="4" second="5">
-        <Label>
-        </Label>
-        <StartOrientation>Horizontal</StartOrientation>
-        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>363</X>
+          <Y>418</Y>
+        </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>

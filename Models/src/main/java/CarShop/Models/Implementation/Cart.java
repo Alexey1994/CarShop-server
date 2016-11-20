@@ -1,5 +1,7 @@
-package CarShop.Models;
+package CarShop.Models.Implementation;
 
+import CarShop.Models.*;
+import CarShop.Models.DataBase;
 import org.hibernate.*;
 import org.hibernate.Query;
 
@@ -8,12 +10,13 @@ import java.util.List;
 
 
 @Entity
-public class CarModels {
+public class Cart {
     private static volatile long nextId = 0;
 
     @Id
-    private long   id;
-    private String model;
+    private long id;
+    private long user_id;
+    private long car_id;
 
 
     private static long generateId() {
@@ -24,7 +27,7 @@ public class CarModels {
         }
 
         Session session = DataBase.getSession();
-        Query query = session.createQuery("SELECT id FROM CarModels");
+        Query query = session.createQuery("SELECT id FROM Cart");
         List ids = query.list();
         Long maxId = null;
 
@@ -53,25 +56,29 @@ public class CarModels {
     }
 
 
-    public long getId() { return this.id; }
-    public void setModel(String model){ this.model = model; }
-    public String getModel() {
-        return this.model;
-    }
+    public long getId(){ return this.id; }
+    public void setUserId(long userId){ this.user_id = userId; }
+    public long getUserId(){ return this.user_id; }
+    public void setcarId(long carId){ this.car_id = carId; }
+    public long getCarId(){ return this.car_id; }
 
 
-    public CarModels() {
+    public Cart(){
         this.id = generateId();
     }
 
 
-    public CarModels(String model) {
-        this.id = generateId();
-        this.model = model;
+    public Cart(long userId, long carId){
+        this.id       = generateId();
+        this.user_id  = userId;
+        this.car_id   = carId;
     }
 
 
-    public String toString() {
-        return this.model;
+    public String toString(){
+        return "{" +
+                "\"user_id\":\"" + this.user_id + "\"," +
+                "\"car_id\":\"" + this.car_id +
+                "\"}";
     }
 }

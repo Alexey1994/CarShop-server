@@ -15,6 +15,9 @@ public class Urls {
         host.attach("/add_product_to_cart",                                                 Controllers.Cart.Adder.class);
         host.attach("/remove_product_from_cart",                                            Controllers.Cart.Deleter.class);
         host.attach("/confirm_purchase",                                                    Controllers.Cart.PurchaseConfirmer.class);
+        host.attach("/get_brands", Controllers.Brands.Getter.class);
+        host.attach("/add_car", Controllers.Cars.Adder.class);
+        host.attach("/get_models/{brand}", Controllers.Models.Getter.class);
     }
 
 }

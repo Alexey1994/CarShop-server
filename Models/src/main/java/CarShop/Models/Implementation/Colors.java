@@ -1,5 +1,7 @@
-package CarShop.Models;
+package CarShop.Models.Implementation;
 
+import CarShop.Models.DAO.ColorsDAO;
+import CarShop.Models.DataBase;
 import org.hibernate.*;
 import org.hibernate.Query;
 import javax.persistence.*;
@@ -7,7 +9,7 @@ import java.util.List;
 
 
 @Entity
-public class Colors {
+public class Colors implements ColorsDAO {
     private static volatile long nextId = 0;
 
     @Id
@@ -49,6 +51,24 @@ public class Colors {
         session.saveOrUpdate(this);
         transaction.commit();
         session.close();
+    }
+
+
+    public ColorsDAO get(long id){
+        Session       session     = DataBase.getSession();
+        Transaction   transaction = session.getTransaction();
+        ColorsDAO     color       = null;
+        List          list;
+
+        transaction.begin();
+        list = session.createQuery("FROM Colors WHERE id = " + id).list();
+        transaction.commit();
+        session.close();
+
+        if(list.size()>0)
+            color = (ColorsDAO)list.get(0);
+
+        return color;
     }
 
 

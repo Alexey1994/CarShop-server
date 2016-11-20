@@ -9,11 +9,16 @@
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.username">root</property>
         <property name="connection.password">root</property>
+        <!--property name="connection.url">jdbc:mysql://sql7.freesqldatabase.com:3306/sql7145458</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.username">sql7145458</property>
+        <property name="connection.password">root</property-->
 
-        <mapping class="CarShop.Models.Cars"/>
-        <mapping class="CarShop.Models.CarModels"/>
-        <mapping class="CarShop.Models.CarTypes"/>
-        <mapping class="CarShop.Models.Colors"/>
+        <mapping class="CarShop.Models.Implementation.Cars"/>
+        <mapping class="CarShop.Models.Implementation.CarBrands"/>
+        <mapping class="CarShop.Models.Implementation.CarModels"/>
+        <mapping class="CarShop.Models.Implementation.Colors"/>
+        <mapping class="CarShop.Models.Implementation.CarImages"/>
         <mapping class="CarShop.Models.Cart"/>
         <mapping class="CarShop.Models.Orders"/>
         <mapping class="CarShop.Models.Sales"/>

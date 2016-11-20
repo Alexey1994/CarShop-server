@@ -4,9 +4,16 @@ CREATE DATABASE CarShop;
 CREATE TABLE CarShop.Users
 (
 	id       LONG,
-	role     VARCHAR(10),
+	role_id  LONG,
 	login    VARCHAR(255),
 	password VARCHAR(255)
+);
+
+
+CREATE TABLE CarShop.Roles
+(
+	id   LONG,
+    role VARCHAR(10)
 );
 
 
@@ -20,6 +27,13 @@ CREATE TABLE CarShop.Orders
 );
 
 
+CREATE TABLE CarShop.OrderStatuses
+(
+	id     LONG,
+    status VARCHAR(10)
+);
+
+
 CREATE TABLE CarShop.Sales
 (
 	id       LONG,
@@ -30,13 +44,13 @@ CREATE TABLE CarShop.Sales
 CREATE TABLE CarShop.Cars
 (
 	id                  LONG,
-	type_id             LONG,
+	brand_id            LONG,
 	model_id            LONG,
     color_id            LONG,
 	power               LONG,
     speed               LONG,
-	year_of_manufacture LONG,
-	image               VARCHAR(255)
+    price               LONG,
+	year_of_manufacture LONG
 );
 
 
@@ -47,17 +61,26 @@ CREATE TABLE CarShop.Colors
 );
 
 
-CREATE TABLE CarShop.CarTypes
+CREATE TABLE CarShop.CarBrands
 (
-	id   LONG,
-	type VARCHAR(255)
+	id    LONG,
+	brand VARCHAR(255)
 );
 
 
 CREATE TABLE CarShop.CarModels
 (
-	id    LONG,
-	model VARCHAR(255)
+	id       LONG,
+    brand_id LONG,
+	model    VARCHAR(255)
+);
+
+
+CREATE TABLE CarShop.CarImages
+(
+	id       LONG,
+	car_id   LONG,
+	image    VARCHAR(255)
 );
 
 
@@ -66,4 +89,32 @@ CREATE TABLE CarShop.Cart
 	id      LONG,
 	user_id LONG,
 	car_id  LONG
+);
+
+
+INSERT INTO CarShop.Roles VALUES
+(
+	0,
+    'user'
+);
+
+
+INSERT INTO CarShop.Roles VALUES
+(
+	1,
+    'admin'
+);
+
+
+INSERT INTO CarShop.OrderStatuses VALUES
+(
+	0,
+	'in cart'
+);
+
+
+INSERT INTO CarShop.OrderStatuses VALUES
+(
+	1,
+	'paid'
 );

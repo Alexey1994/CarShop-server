@@ -1,7 +1,7 @@
-package CarShop.Models;
+package CarShop.Models.Implementation;
 
-import CarShop.Models.Cars;
-import CarShop.Models.Finder;
+import CarShop.Models.CarsFactory;
+import CarShop.Models.DAO.CarsDAO;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -37,26 +37,28 @@ public class CarsTest {
         carsColorIds[1] = 2;
         carsColorIds[2] = 3;
 
-        Cars.findCars(carsColorIds, carsColorIds, carsColorIds, 100, 200, 200, 320, 2010, 2015);
+        CarsDAO c = new Cars();
+        c.findCars(100, carsColorIds, carsColorIds, carsColorIds, 100, 200, 200, 320, 1000, 5000, 2010, 2015);
     }
 
 
     @Test
     public void testGetCar(){
-        System.out.println(Cars.get(1));
+        System.out.println(CarsFactory.getDAO().get(1));
     }
 
 
     @Test
     public void testSaveCars(){
-        Cars car = new Cars(0, 1, 1, 300, 250, 2014, "a.img");
+
+        CarsDAO car = CarsFactory.getDAO(1, 1, 1, 300, 250, 20000, 2014);
         car.save();
     }
 
 
     @Test
     public void testUpdate(){
-        Cars car = Cars.get(1);
+        CarsDAO car = CarsFactory.getDAO().get(1);
 
         if(car == null)
             return;
@@ -68,9 +70,9 @@ public class CarsTest {
 
     @Test
     public void testDelete(){
-        Cars car = new Cars(0, 1, 1, 300, 250, 2014, "a.img");
+        CarsDAO car = CarsFactory.getDAO(0, 1, 1, 300, 250, 10000, 2014);
 
         car.save();
-        Cars.delete(car.getId());
+        car.delete();
     }
 }
