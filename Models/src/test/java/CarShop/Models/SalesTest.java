@@ -6,8 +6,6 @@ import org.junit.Test;
 public class SalesTest {
     @Test
     public void testSave(){
-        Sales sale = new Sales();
-
-        sale.save();
+        //SalesFactory.getDAO().save();
     }
 }

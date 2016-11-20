@@ -1,7 +1,6 @@
 package CarShop.Models.Implementation;
 
-import CarShop.Models.*;
-import CarShop.Models.DataBase;
+import CarShop.Models.DAO.CartDAO;
 import org.hibernate.*;
 import org.hibernate.Query;
 
@@ -10,7 +9,7 @@ import java.util.List;
 
 
 @Entity
-public class Cart {
+public class Cart implements CartDAO {
     private static volatile long nextId = 0;
 
     @Id

@@ -1,4 +1,4 @@
-package CarShop.Models.Implementation;
+package CarShop.Models;
 
 import CarShop.Models.CarImagesFactory;
 import CarShop.Models.DAO.CarImagesDAO;

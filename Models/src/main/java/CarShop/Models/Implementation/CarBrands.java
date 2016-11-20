@@ -1,7 +1,6 @@
 package CarShop.Models.Implementation;
 
 import CarShop.Models.DAO.CarBrandsDAO;
-import CarShop.Models.DataBase;
 import org.hibernate.*;
 import org.hibernate.Query;
 

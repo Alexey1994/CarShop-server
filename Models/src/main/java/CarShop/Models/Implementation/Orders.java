@@ -1,7 +1,6 @@
 package CarShop.Models.Implementation;
 
-import CarShop.Models.*;
-import CarShop.Models.DataBase;
+import CarShop.Models.DAO.OrdersDAO;
 import org.hibernate.*;
 import org.hibernate.Query;
 
@@ -11,7 +10,7 @@ import java.util.List;
 
 
 @Entity
-public class Orders {
+public class Orders implements OrdersDAO {
     private static volatile long nextId = 0;
 
     @Id

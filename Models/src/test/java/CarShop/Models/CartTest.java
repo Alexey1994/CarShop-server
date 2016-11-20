@@ -1,13 +1,12 @@
 package CarShop.Models;
 
 
+import CarShop.Models.CartFactory;
 import org.junit.Test;
 
 public class CartTest {
     @Test
     public void testSave(){
-        Cart cart = new Cart();
-
-        cart.save();
+        CartFactory.getDAO().save();
     }
 }

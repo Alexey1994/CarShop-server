@@ -1,7 +1,9 @@
-package CarShop.Models.Implementation;
+package CarShop.Models;
 
 import CarShop.Models.CarsFactory;
 import CarShop.Models.DAO.CarsDAO;
+import CarShop.Models.Implementation.Cars;
+import CarShop.Models.Implementation.Finder;
 import org.junit.Assert;
 import org.junit.Test;
 

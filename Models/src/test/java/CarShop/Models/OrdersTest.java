@@ -1,13 +1,12 @@
 package CarShop.Models;
 
 
+import CarShop.Models.OrdersFactory;
 import org.junit.Test;
 
 public class OrdersTest {
     @Test
     public void testSave(){
-        Orders order = new Orders();
-
-        order.save();
+        //OrdersFactory.getDAO().save();
     }
 }

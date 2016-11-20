@@ -1,7 +1,6 @@
 package CarShop.Models.Implementation;
 
 import CarShop.Models.DAO.*;
-import CarShop.Models.DataBase;
 import org.hibernate.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;

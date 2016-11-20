@@ -1,17 +1,15 @@
 package CarShop.Models.Implementation;
 
-import CarShop.Models.*;
-import CarShop.Models.DataBase;
+import CarShop.Models.DAO.SalesDAO;
 import org.hibernate.*;
 import org.hibernate.Query;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.List;
 
 
 @Entity
-public class Sales {
+public class Sales implements SalesDAO {
     private static volatile long nextId = 0;
 
     @Id
