@@ -102,7 +102,7 @@ public class CarModels implements CarModelsDAO {
     }
 
 
-    public List getModelsWithBrand(String brand){
+    public List getModelsWithBrand(long brandId){
         Session       session = DataBase.getSession();
         Transaction   transaction = session.getTransaction();
         CarModelsDAO  carModel    = null;
@@ -111,10 +111,8 @@ public class CarModels implements CarModelsDAO {
 
         transaction.begin();
 
-        query = session.createQuery("FROM CarModels WHERE model = :carModel");
-        query.setParameter("carModel", model);
+        list = session.createQuery("FROM CarModels WHERE brand_id = " + brandId).list();
 
-        list = query.list();
         transaction.commit();
         session.close();
 

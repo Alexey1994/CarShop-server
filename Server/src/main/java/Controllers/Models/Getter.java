@@ -1,9 +1,8 @@
 package Controllers.Models;
 
-import CarShop.Models.CarBrandsDAO;
-import CarShop.Models.CarModelsDAO;
-import CarShop.Models.Implementation.CarBrands;
-import CarShop.Models.Implementation.CarModels;
+import CarShop.Models.*;
+import CarShop.Models.DAO.CarBrandsDAO;
+import CarShop.Models.DAO.CarModelsDAO;
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
 import java.util.List;
@@ -13,17 +12,33 @@ public class Getter extends ServerResource {
     @Get("txt")
     public String toString(){
         String       brandString = getAttribute("brand");
-        CarBrandsDAO carBrands;
-        List models;
+        CarBrandsDAO carBrand;
+        CarModelsDAO carModel;
+        String       modelsString;
+        List         models;
 
         if(brandString == null)
             return "[]";
 
-        carBrands = new CarBrands().get(brandString);
+        carBrand = CarBrandsFactory.getDAO().get(brandString);
 
-        if(carBrands == null)
+        if(carBrand == null)
             return "[]";
 
-        models = new CarModels().
+        models = CarModelsFactory.getDAO().getModelsWithBrand(carBrand.getId());
+
+        modelsString = "[";
+
+        for(int i=0; i<models.size()-1; ++i){
+            carModel = (CarModelsDAO) models.get(i);
+            modelsString += "\"" + carModel + "\",";
+        }
+        System.out.println(models.size());
+        if(models.size()>0)
+            modelsString += "\"" + models.get(models.size() - 1) + "\"";
+
+        modelsString += "]";
+
+        return modelsString;
     }
 }

@@ -1,6 +1,7 @@
 package Controllers.Cars;
 
 import CarShop.Models.*;
+import CarShop.Models.DAO.CarsDAO;
 import CarShop.Models.Implementation.Cars;
 import org.json.*;
 import org.json.simple.JSONArray;

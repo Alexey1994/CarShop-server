@@ -19,8 +19,8 @@
         <mapping class="CarShop.Models.Implementation.CarModels"/>
         <mapping class="CarShop.Models.Implementation.Colors"/>
         <mapping class="CarShop.Models.Implementation.CarImages"/>
-        <mapping class="CarShop.Models.Cart"/>
-        <mapping class="CarShop.Models.Orders"/>
-        <mapping class="CarShop.Models.Sales"/>
+        <mapping class="CarShop.Models.Implementation.Cart"/>
+        <mapping class="CarShop.Models.Implementation.Orders"/>
+        <mapping class="CarShop.Models.Implementation.Sales"/>
     </session-factory>
 </hibernate-configuration>

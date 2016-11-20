@@ -1,8 +1,8 @@
 package Controllers.Cars;
 
-import CarShop.Models.CarBrandsDAO;
-import CarShop.Models.CarModelsDAO;
-import CarShop.Models.CarsDAO;
+import CarShop.Models.DAO.CarBrandsDAO;
+import CarShop.Models.DAO.CarModelsDAO;
+import CarShop.Models.DAO.CarsDAO;
 import CarShop.Models.Implementation.CarBrands;
 import CarShop.Models.Implementation.CarModels;
 import CarShop.Models.Implementation.Cars;
