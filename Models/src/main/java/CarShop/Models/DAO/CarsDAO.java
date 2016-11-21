@@ -7,9 +7,9 @@ import java.util.List;
 public interface CarsDAO {
 
     public List findCars(int  maxResults,
-                         long colorIds[],
                          long brandIds[],
                          long modelIds[],
+                         long colorIds[],
                          long powerMin,
                          long powerMax,
                          long speedMin,

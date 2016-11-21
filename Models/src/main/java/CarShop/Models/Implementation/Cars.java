@@ -27,13 +27,45 @@ class Finder {
         isFirstParameter = false;
 
         for (int i = 1; i < parameters.length; i++) {
-            if (!isFirstParameter)
-                query += " OR ";
-            else
-                query += "WHERE ";
-
+            query += " OR ";
             query += parameter + "=" + parameters[i];
-            isFirstParameter = false;
+        }
+
+        query += ")";
+    }
+
+
+    public void addComboArrayParametersFilter(String nameParameter1, String nameParameter2, long parameters1[], long parameters2[]) {
+        if (parameters1.length == 0 || parameters1.length != parameters2.length)
+            return;
+
+        if (!isFirstParameter)
+            query += " AND ";
+        else
+            query += "WHERE ";
+
+        query += "(";
+
+        if(parameters2[0] == 0) {
+            query += nameParameter1 + "=" + parameters1[0];
+        }
+        else {
+            query += nameParameter1 + "=" + parameters1[0] + " AND " +
+                     nameParameter2 + "=" + parameters2[0];
+        }
+
+        isFirstParameter = false;
+
+        for (int i = 1; i < parameters1.length; i++) {
+            query += " OR ";
+
+            if(parameters2[i] == 0) {
+                query += nameParameter1 + "=" + parameters1[i];
+            }
+            else {
+                query += nameParameter1 + "=" + parameters1[i] + " AND " +
+                         nameParameter2 + "=" + parameters2[i];
+            }
         }
 
         query += ")";
@@ -108,9 +140,9 @@ public class Cars implements CarsDAO {
 
 
     public List findCars(int  maxResults,
-                         long colorIds[],
                          long brandIds[],
                          long modelIds[],
+                         long colorIds[],
                          long powerMin,
                          long powerMax,
                          long speedMin,
@@ -126,8 +158,7 @@ public class Cars implements CarsDAO {
         Query dbQuery;
         List cars;
 
-        finder.addArrayParametersFilter("brand_id", brandIds);
-        finder.addArrayParametersFilter("model_id", modelIds);
+        finder.addComboArrayParametersFilter("brand_id", "model_id", brandIds, modelIds);
         finder.addArrayParametersFilter("color_id", colorIds);
         finder.addRangedParameterFilter("power", powerMin, powerMax);
         finder.addRangedParameterFilter("speed", speedMin, speedMax);
@@ -137,7 +168,7 @@ public class Cars implements CarsDAO {
         finderQuery = finder.getQuery();
 
         dbQuery = session.createQuery(finderQuery);
-        dbQuery.setMaxResults(5);
+        dbQuery.setMaxResults(maxResults);
         cars = dbQuery.list();
         session.close();
 

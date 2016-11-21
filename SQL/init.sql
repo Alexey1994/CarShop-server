@@ -68,11 +68,26 @@ CREATE TABLE CarShop.CarBrands
 );
 
 
+INSERT INTO CarShop.CarBrands VALUES
+(
+	0,
+    'Любая'
+);
+
+
 CREATE TABLE CarShop.CarModels
 (
 	id       LONG,
     brand_id LONG,
 	model    VARCHAR(255)
+);
+
+
+INSERT INTO CarShop.CarModels VALUES
+(
+	0,
+    0,
+    'Любой'
 );
 
 
