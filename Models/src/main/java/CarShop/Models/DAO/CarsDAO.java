@@ -17,7 +17,9 @@ public interface CarsDAO {
                          long priceMin,
                          long priceMax,
                          long yearOfManufactureMin,
-                         long yearOfManufactureMax);
+                         long yearOfManufactureMax,
+                         String orderBy,
+                         String order);
 
 
     public void save();

@@ -1,0 +1,94 @@
+index.html 
+ 
+This is ApacheBench, Version 2.3 <$Revision: 655654 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        Restlet-Framework/2.3.7
+Server Hostname:        localhost
+Server Port:            5000
+
+Document Path:          /
+Document Length:        3928 bytes
+
+Concurrency Level:      2000
+Time taken for tests:   68.714 seconds
+Complete requests:      100000
+Failed requests:        0
+Write errors:           0
+Keep-Alive requests:    100000
+Total transferred:      432800000 bytes
+HTML transferred:       392800000 bytes
+Requests per second:    1455.31 [#/sec] (mean)
+Time per request:       1374.279 [ms] (mean)
+Time per request:       0.687 [ms] (mean, across all concurrent requests)
+Transfer rate:          6150.95 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:    38 1283 2995.0    132   12081
+Waiting:       38 1283 2995.0    132   12081
+Total:         38 1283 2995.0    132   12081
+
+Percentage of the requests served within a certain time (ms)
+  50%    132
+  66%    141
+  75%    153
+  80%    159
+  90%   8288
+  95%   8911
+  98%  10628
+  99%  11165
+ 100%  12081 (longest request)
+ 
+ 
+/get_brands 
+ 
+This is ApacheBench, Version 2.3 <$Revision: 655654 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        Restlet-Framework/2.3.7
+Server Hostname:        localhost
+Server Port:            5000
+
+Document Path:          /get_brands
+Document Length:        53 bytes
+
+Concurrency Level:      2000
+Time taken for tests:   28.446 seconds
+Complete requests:      100000
+Failed requests:        0
+Write errors:           0
+Keep-Alive requests:    100000
+Total transferred:      29201850 bytes
+HTML transferred:       5318550 bytes
+Requests per second:    3515.48 [#/sec] (mean)
+Time per request:       568.913 [ms] (mean)
+Time per request:       0.284 [ms] (mean, across all concurrent requests)
+Transfer rate:          1002.52 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   2.5      0     575
+Processing:     7  548 241.8    516    2225
+Waiting:        7  548 241.8    516    2225
+Total:          7  548 241.8    516    2225
+
+Percentage of the requests served within a certain time (ms)
+  50%    516
+  66%    575
+  75%    626
+  80%    666
+  90%    792
+  95%    943
+  98%   1368
+  99%   1508
+ 100%   2225 (longest request)

@@ -4,6 +4,7 @@ import CarShop.Models.DAO.*;
 import org.hibernate.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -150,13 +151,43 @@ public class Cars implements CarsDAO {
                          long priceMin,
                          long priceMax,
                          long yearOfManufactureMin,
-                         long yearOfManufactureMax) {
+                         long yearOfManufactureMax,
+                         String orderBy,
+                         String order) {
 
         Session session = DataBase.getSession();
         Finder finder = new Finder("FROM Cars ");
         String finderQuery;
         Query dbQuery;
         List cars;
+
+        if(orderBy != null) {
+            switch (orderBy) {
+                case "price":
+                    break;
+                case "power":
+                    break;
+                case "speed":
+                    break;
+                case "year_of_manufacture":
+                    break;
+
+                default:
+                    orderBy = null;
+            }
+        }
+
+        if(order != null) {
+            switch (order) {
+                case "asc":
+                    break;
+                case "desc":
+                    break;
+
+                default:
+                    order = null;
+            }
+        }
 
         finder.addComboArrayParametersFilter("brand_id", "model_id", brandIds, modelIds);
         finder.addArrayParametersFilter("color_id", colorIds);
@@ -166,6 +197,13 @@ public class Cars implements CarsDAO {
         finder.addRangedParameterFilter("year_of_manufacture", yearOfManufactureMin, yearOfManufactureMax);
 
         finderQuery = finder.getQuery();
+
+        if(orderBy != null){
+            finderQuery += " order by " + orderBy;
+
+            if(order != null)
+                finderQuery += " " + order;
+        }
 
         dbQuery = session.createQuery(finderQuery);
         dbQuery.setMaxResults(maxResults);

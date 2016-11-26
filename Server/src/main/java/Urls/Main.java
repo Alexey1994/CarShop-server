@@ -15,7 +15,7 @@ public class Main extends ServerResource {
         Component   component = new Component();
         Server      server    = component.getServers().add(Protocol.HTTP, 5000);
         //Server      server    = component.getServers().add(Protocol.HTTP, Integer.parseInt(args[0]));
-        Directory   dir       = new Directory(component.getContext().createChildContext(), "file:///d:/Работа/netcracker/Вёрстка");
+        Directory   dir       = new Directory(component.getContext().createChildContext(), "file:///c:/carshop/Вёрстка");
         //Directory   dir       = new Directory(component.getContext().createChildContext(), "https://alexey1994.github.io/CarShop-static/");
         VirtualHost host      = component.getDefaultHost();
 

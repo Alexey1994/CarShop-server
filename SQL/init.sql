@@ -1,3 +1,5 @@
+SET GLOBAL time_zone = '+2:00';
+
 CREATE DATABASE CarShop;
 
 
@@ -17,6 +19,20 @@ CREATE TABLE CarShop.Roles
 );
 
 
+INSERT INTO CarShop.Roles VALUES
+(
+	0,
+    'user'
+);
+
+
+INSERT INTO CarShop.Roles VALUES
+(
+	1,
+    'admin'
+);
+
+
 CREATE TABLE CarShop.Orders
 (
 	id          LONG,
@@ -31,6 +47,20 @@ CREATE TABLE CarShop.OrderStatuses
 (
 	id     LONG,
     status VARCHAR(10)
+);
+
+
+INSERT INTO CarShop.OrderStatuses VALUES
+(
+	0,
+	'in cart'
+);
+
+
+INSERT INTO CarShop.OrderStatuses VALUES
+(
+	1,
+	'paid'
 );
 
 
@@ -58,6 +88,13 @@ CREATE TABLE CarShop.Colors
 (
 	id   LONG,
 	name VARCHAR(255)
+);
+
+
+INSERT INTO CarShop.Colors VALUES
+(
+	0,
+    'Любой'
 );
 
 
@@ -104,32 +141,4 @@ CREATE TABLE CarShop.Cart
 	id      LONG,
 	user_id LONG,
 	car_id  LONG
-);
-
-
-INSERT INTO CarShop.Roles VALUES
-(
-	0,
-    'user'
-);
-
-
-INSERT INTO CarShop.Roles VALUES
-(
-	1,
-    'admin'
-);
-
-
-INSERT INTO CarShop.OrderStatuses VALUES
-(
-	0,
-	'in cart'
-);
-
-
-INSERT INTO CarShop.OrderStatuses VALUES
-(
-	1,
-	'paid'
 );

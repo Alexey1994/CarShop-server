@@ -36,7 +36,7 @@ public class CarBrands implements CarBrandsDAO {
             nextId++;
             return nextId;
         }
-        System.out.println(maxId);
+
         nextId = maxId.longValue() + 1;
 
         return nextId;

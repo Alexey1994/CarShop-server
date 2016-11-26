@@ -48,7 +48,7 @@ public class Adder extends ServerResource {
             model.save();
         }
 
-        CarsDAO car = new Cars(brand.getId(), model.getId(), 1, 100, 200, 1000, 2014);
+        CarsDAO car = new Cars(brand.getId(), model.getId(), 1, 100, 100, 1000, 2014);
 
         car.save();
 

@@ -71,6 +71,42 @@ public class Colors implements ColorsDAO {
     }
 
 
+    public ColorsDAO get(String name){
+        Session       session     = DataBase.getSession();
+        Transaction   transaction = session.getTransaction();
+        ColorsDAO     color       = null;
+        List          list;
+
+        transaction.begin();
+        Query query = session.createQuery("FROM Colors WHERE name = :colorName");
+        query.setParameter("colorName", name);
+
+        list = query.list();
+        transaction.commit();
+        session.close();
+
+        if(list.size()>0)
+            color = (ColorsDAO)list.get(0);
+
+        return color;
+    }
+
+
+    public List getAll(){
+        Session       session     = DataBase.getSession();
+        Transaction   transaction = session.getTransaction();
+        ColorsDAO     color       = null;
+        List          list;
+
+        transaction.begin();
+        list = session.createQuery("FROM Colors").list();
+        transaction.commit();
+        session.close();
+
+        return list;
+    }
+
+
     public long getId() {
         return this.id;
     }
@@ -88,5 +124,9 @@ public class Colors implements ColorsDAO {
     public Colors(String name){
         this.id   = generateId();
         this.name = name;
+    }
+
+    public String toString(){
+        return name;
     }
 }
