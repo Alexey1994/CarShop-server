@@ -332,6 +332,8 @@ public class Cars implements CarsDAO {
 
         if(images.size() > 0)
             imagesString += "\"" + images.get(images.size() - 1) + "\"";
+        else
+            imagesString += "\"empty.png\"";
 
         imagesString += "]";
 

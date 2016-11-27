@@ -12,38 +12,39 @@ Server Hostname:        localhost
 Server Port:            5000
 
 Document Path:          /
-Document Length:        3928 bytes
+Document Length:        4870 bytes
 
 Concurrency Level:      2000
-Time taken for tests:   68.714 seconds
+Time taken for tests:   87.569 seconds
 Complete requests:      100000
-Failed requests:        0
+Failed requests:        49
+   (Connect: 0, Receive: 0, Length: 49, Exceptions: 0)
 Write errors:           0
-Keep-Alive requests:    100000
-Total transferred:      432800000 bytes
-HTML transferred:       392800000 bytes
-Requests per second:    1455.31 [#/sec] (mean)
-Time per request:       1374.279 [ms] (mean)
-Time per request:       0.687 [ms] (mean, across all concurrent requests)
-Transfer rate:          6150.95 [Kbytes/sec] received
+Keep-Alive requests:    99951
+Total transferred:      526747040 bytes
+HTML transferred:       486766240 bytes
+Requests per second:    1141.96 [#/sec] (mean)
+Time per request:       1751.380 [ms] (mean)
+Time per request:       0.876 [ms] (mean, across all concurrent requests)
+Transfer rate:          5874.24 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.0      0       1
-Processing:    38 1283 2995.0    132   12081
-Waiting:       38 1283 2995.0    132   12081
-Total:         38 1283 2995.0    132   12081
+Connect:        0    0   2.5      0     581
+Processing:     7 1579 4418.9    158   23804
+Waiting:        0 1569 4398.2    158   23804
+Total:          7 1579 4418.9    158   23804
 
 Percentage of the requests served within a certain time (ms)
-  50%    132
-  66%    141
-  75%    153
-  80%    159
-  90%   8288
-  95%   8911
-  98%  10628
-  99%  11165
- 100%  12081 (longest request)
+  50%    158
+  66%    172
+  75%    185
+  80%    193
+  90%    547
+  95%  14217
+  98%  16719
+  99%  18120
+ 100%  23804 (longest request)
  
  
 /get_brands 
@@ -63,32 +64,34 @@ Document Path:          /get_brands
 Document Length:        53 bytes
 
 Concurrency Level:      2000
-Time taken for tests:   28.446 seconds
+Time taken for tests:   40.708 seconds
 Complete requests:      100000
-Failed requests:        0
+Failed requests:        44
+   (Connect: 0, Receive: 0, Length: 44, Exceptions: 0)
 Write errors:           0
-Keep-Alive requests:    100000
-Total transferred:      29201850 bytes
-HTML transferred:       5318550 bytes
-Requests per second:    3515.48 [#/sec] (mean)
-Time per request:       568.913 [ms] (mean)
-Time per request:       0.284 [ms] (mean, across all concurrent requests)
-Transfer rate:          1002.52 [Kbytes/sec] received
+Non-2xx responses:      44
+Keep-Alive requests:    99956
+Total transferred:      29283332 bytes
+HTML transferred:       5341472 bytes
+Requests per second:    2456.50 [#/sec] (mean)
+Time per request:       814.167 [ms] (mean)
+Time per request:       0.407 [ms] (mean, across all concurrent requests)
+Transfer rate:          702.49 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   2.5      0     575
-Processing:     7  548 241.8    516    2225
-Waiting:        7  548 241.8    516    2225
-Total:          7  548 241.8    516    2225
+Connect:        0    0   0.1      0      13
+Processing:     7  799 949.5    575   33223
+Waiting:        7  799 949.3    575   33176
+Total:          7  799 949.5    575   33223
 
 Percentage of the requests served within a certain time (ms)
-  50%    516
-  66%    575
-  75%    626
-  80%    666
-  90%    792
-  95%    943
-  98%   1368
-  99%   1508
- 100%   2225 (longest request)
+  50%    575
+  66%    642
+  75%    746
+  80%    830
+  90%   1220
+  95%   1629
+  98%   4450
+  99%   5347
+ 100%  33223 (longest request)

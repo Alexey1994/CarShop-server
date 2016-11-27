@@ -8,6 +8,8 @@ public class Urls {
     public static void initRoutes(VirtualHost host){
         host.attach("/login",                    Controllers.Users.Logger.class);
         host.attach("/register",                 Controllers.Users.Adder.class);
+        host.attach("/get_user",                 Controllers.Users.Getter.class);
+        host.attach("/logout",                   Controllers.Users.Outer.class);
         host.attach("/find_cars",                Controllers.Cars.Finder.class);
         host.attach("/get_cart",                 Controllers.Cart.Getter.class);
         host.attach("/add_product_to_cart",      Controllers.Cart.Adder.class);

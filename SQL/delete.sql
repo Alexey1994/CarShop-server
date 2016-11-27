@@ -1,1 +1,3 @@
 DROP DATABASE CarShop;
+
+DROP TABLE CarShop.Users;

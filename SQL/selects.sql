@@ -6,3 +6,4 @@ SELECT * FROM CarShop.CarImages;
 SELECT * FROM CarShop.Cart;
 SELECT * FROM CarShop.Orders;
 SELECT * FROM CarShop.Sales;
+SELECT * FROM CarShop.Users;

@@ -9,7 +9,7 @@
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.username">root</property>
         <property name="connection.password">root</property>
-        <property name="connection.pool_size">10000</property>
+        <property name="connection.pool_size">2000</property>
         <!--property name="connection.url">jdbc:mysql://sql7.freesqldatabase.com:3306/sql7145458</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.username">sql7145458</property>
@@ -23,5 +23,7 @@
         <mapping class="CarShop.Models.Implementation.Cart"/>
         <mapping class="CarShop.Models.Implementation.Orders"/>
         <mapping class="CarShop.Models.Implementation.Sales"/>
+        <mapping class="CarShop.Models.Implementation.Roles"/>
+        <mapping class="CarShop.Models.Implementation.Users"/>
     </session-factory>
 </hibernate-configuration>

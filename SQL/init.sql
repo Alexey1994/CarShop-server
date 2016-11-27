@@ -5,10 +5,11 @@ CREATE DATABASE CarShop;
 
 CREATE TABLE CarShop.Users
 (
-	id       LONG,
-	role_id  LONG,
-	login    VARCHAR(255),
-	password VARCHAR(255)
+	id           LONG,
+	role_id      LONG,
+	login        VARCHAR(255),
+	password     VARCHAR(255),
+    last_session VARCHAR(255)
 );
 
 

@@ -246,6 +246,23 @@ public class Finder extends ServerResource {
     }
 
 
+    private String getImage(long carId){
+        List   images       = CarImagesFactory.getDAO().getImages(carId);
+        String imageString;
+
+        if(images.size() == 0)
+            return "empty.png";
+
+        try {
+            imageString = (String) images.get(0);
+        } catch (ClassCastException e){
+            return "empty.png";
+        }
+
+        return imageString;
+    }
+
+
     private boolean getSelectedCars(){
         Object     selectedCarsObject = in.get("selected_cars");
         JSONArray  selectedCars;
@@ -256,7 +273,13 @@ public class Finder extends ServerResource {
             return true;
         }
 
-        selectedCars = (JSONArray)selectedCarsObject;
+        try {
+            selectedCars = (JSONArray) selectedCarsObject;
+        } catch (ClassCastException e){
+            brandIds = new long[0];
+            modelIds = new long[0];
+            return true;
+        }
 
         brandIds = new long[selectedCars.size()];
         modelIds = new long[selectedCars.size()];
