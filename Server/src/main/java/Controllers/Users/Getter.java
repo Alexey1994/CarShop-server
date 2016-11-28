@@ -10,7 +10,7 @@ import org.restlet.resource.ServerResource;
 public class Getter extends ServerResource {
     @Get("txt")
     public String toString(){
-        UsersDAO user = AuthenticatorBySession.getAuthenticateUser( this.getRequest().getCookies() );
+        UsersDAO user = AuthenticatorBySession.getAuthenticatedUser( this.getRequest().getCookies() );
 
         if(user == null)
             return "{\"status\":\"User not found\"}";

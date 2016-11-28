@@ -9,7 +9,7 @@ import java.net.URLDecoder;
 
 
 public class AuthenticatorBySession {
-    public static UsersDAO getAuthenticateUser(Series<Cookie> cookie){
+    public static UsersDAO getAuthenticatedUser(Series<Cookie> cookie){
         String login   = cookie.getValues("login");
         String session = cookie.getValues("session_id");
 
@@ -32,6 +32,6 @@ public class AuthenticatorBySession {
 
 
     public static boolean isAuthenticate(Series<Cookie> cookie){
-        return getAuthenticateUser(cookie) != null;
+        return getAuthenticatedUser(cookie) != null;
     }
 }

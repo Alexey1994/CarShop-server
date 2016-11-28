@@ -29,6 +29,13 @@ INSERT INTO CarShop.Roles VALUES
 
 INSERT INTO CarShop.Roles VALUES
 (
+	2,
+    'purchaser'
+);
+
+
+INSERT INTO CarShop.Roles VALUES
+(
 	1,
     'admin'
 );

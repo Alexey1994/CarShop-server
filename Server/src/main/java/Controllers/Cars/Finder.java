@@ -50,8 +50,8 @@ public class Finder extends ServerResource {
             orderBy = "price";
         }
 
-        if(orderBy == null || (orderBy != "price" && orderBy != "speed" && orderBy != "power" && orderBy != "year_of_manufacture"))
-            orderBy = null;//"price";
+        if(orderBy == null || (orderBy.compareTo("price")!=0 && orderBy.compareTo("speed")!=0 && orderBy.compareTo("power")!=0 && orderBy.compareTo("year_of_manufacture")!=0))
+            orderBy = "price";
     }
 
 
@@ -62,7 +62,7 @@ public class Finder extends ServerResource {
             order = "asc";
         }
 
-        if(order == null || (order != "asc" && order != "desc"))
+        if(order == null || (order.compareTo("asc") != 0 && order.compareTo("desc") != 0))
             order = "asc";
     }
 
@@ -359,7 +359,7 @@ public class Finder extends ServerResource {
         String   result;
         int      i;
 
-        result = "{\"pages\":" + cars.size() / numPagesOnPage + ", \"result\":[";
+        result = "{\"pages\":" + (cars.size() / numPagesOnPage + 1)  + ", \"result\":[";
 
         for(i=startElement; i<cars.size() - 1 && i < startElement + numPagesOnPage - 1; i++) {
             car = (Cars)cars.get(i);
@@ -379,9 +379,6 @@ public class Finder extends ServerResource {
     public String toString(Representation params) throws IOException {
         JSONParser parser = new JSONParser();
         String     paramsString = params.getText();
-
-        //getCookieSettings().set("name", "Alexey");
-        System.out.println("cookie: " + getRequest().getCookies().getValues("ID"));
 
         try{
             in = (JSONObject) parser.parse(paramsString);
