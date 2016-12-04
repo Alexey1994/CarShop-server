@@ -1,4 +1,5 @@
 SELECT COUNT(*) FROM CarShop.Cars;
+SELECT * FROM CarShop.Cars;
 SELECT * FROM CarShop.CarBrands;
 SELECT * FROM CarShop.CarModels;
 SELECT * FROM CarShop.Colors;

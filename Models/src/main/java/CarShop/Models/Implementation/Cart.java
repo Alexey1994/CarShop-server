@@ -5,42 +5,43 @@ import org.hibernate.*;
 import org.hibernate.Query;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
 @Entity
 public class Cart implements CartDAO {
-    private static volatile long nextId = 0;
 
     @Id
     private long id;
-    private long user_id;
     private long car_id;
+    private long customer_id;
 
 
-    private static long generateId() {
-        if(nextId != 0)
-        {
-            nextId++;
-            return nextId;
-        }
+    private long generateId(){
+        return new Date().getTime();
+    }
 
-        Session session = DataBase.getSession();
-        Query query = session.createQuery("SELECT id FROM Cart");
-        List ids = query.list();
-        Long maxId = null;
 
-        if (ids.size() > 0)
-            maxId = (Long) ids.get(ids.size() - 1);
+    public CartDAO get(long id){
+        Session     session     = DataBase.getSession();
+        Transaction transaction = session.getTransaction();
+        List        products;
+        CartDAO     cart;
+
+        transaction.begin();
+
+        products = session.createQuery("FROM Cart WHERE id=" + id).list();
+
+        if(products.size() != 0)
+            cart = (CartDAO)products.get(0);
         else
-        {
-            nextId++;
-            return nextId;
-        }
-        System.out.println(maxId);
-        nextId = maxId.longValue() + 1;
+            cart = null;
 
-        return nextId;
+        transaction.commit();
+        session.close();
+
+        return cart;
     }
 
 
@@ -55,9 +56,39 @@ public class Cart implements CartDAO {
     }
 
 
+    public void delete(){
+        Session session = DataBase.getSession();
+        Transaction transaction = session.getTransaction();
+
+        transaction.begin();
+        session.delete(this);
+        transaction.commit();
+        session.close();
+    }
+
+
+    public List getOrders(long customerId){
+        Session     session     = DataBase.getSession();
+        Transaction transaction = session.getTransaction();
+        Query       query;
+        List        orders;
+
+        transaction.begin();
+
+        query = session.createQuery("FROM Cart WHERE customer_id=:customerId");
+        query.setParameter("customerId", customerId);
+
+        orders = query.list();
+        transaction.commit();
+        session.close();
+
+        return orders;
+    }
+
+
     public long getId(){ return this.id; }
-    public void setUserId(long userId){ this.user_id = userId; }
-    public long getUserId(){ return this.user_id; }
+    public void setCustomerId(long customerId){ this.customer_id = customerId; }
+    public long getCustomerId(){ return this.customer_id; }
     public void setcarId(long carId){ this.car_id = carId; }
     public long getCarId(){ return this.car_id; }
 
@@ -67,16 +98,17 @@ public class Cart implements CartDAO {
     }
 
 
-    public Cart(long userId, long carId){
-        this.id       = generateId();
-        this.user_id  = userId;
-        this.car_id   = carId;
+    public Cart(long customerId, long carId){
+        this.id           = generateId();
+        this.customer_id  = customerId;
+        this.car_id       = carId;
     }
 
 
     public String toString(){
         return "{" +
-                "\"user_id\":\"" + this.user_id + "\"," +
+                "\"id\":\"" + this.id + "\"," +
+                "\"customer_id\":\"" + this.customer_id + "\"," +
                 "\"car_id\":\"" + this.car_id +
                 "\"}";
     }

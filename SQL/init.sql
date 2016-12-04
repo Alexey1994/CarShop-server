@@ -12,6 +12,16 @@ CREATE TABLE CarShop.Users
     last_session VARCHAR(255)
 );
 
+/*
+INSERT INTO CarShop.Users VALUES
+(
+	0,
+    2,
+    '',
+    '',
+    ''
+);*/
+
 
 CREATE TABLE CarShop.Roles
 (
@@ -47,7 +57,7 @@ CREATE TABLE CarShop.Orders
 	car_id      LONG,
 	customer_id LONG,
 	order_date  DATE,
-    status      VARCHAR(10)
+    status_id   long
 );
 
 
@@ -146,7 +156,7 @@ CREATE TABLE CarShop.CarImages
 
 CREATE TABLE CarShop.Cart
 (
-	id      LONG,
-	user_id LONG,
-	car_id  LONG
+	id          LONG,
+	customer_id LONG,
+	car_id      LONG
 );

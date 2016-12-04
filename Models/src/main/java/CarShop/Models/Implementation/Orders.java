@@ -11,39 +11,17 @@ import java.util.List;
 
 @Entity
 public class Orders implements OrdersDAO {
-    private static volatile long nextId = 0;
 
     @Id
     private long    id;
     private long    car_id;
     private long    customer_id;
     private Date    order_date;
-    private String  status;
+    private long    status_id;
 
 
-    private static long generateId() {
-        if(nextId != 0)
-        {
-            nextId++;
-            return nextId;
-        }
-
-        Session session = DataBase.getSession();
-        Query query = session.createQuery("SELECT id FROM Orders");
-        List ids = query.list();
-        Long maxId = null;
-
-        if (ids.size() > 0)
-            maxId = (Long) ids.get(ids.size() - 1);
-        else
-        {
-            nextId++;
-            return nextId;
-        }
-        System.out.println(maxId);
-        nextId = maxId.longValue() + 1;
-
-        return nextId;
+    private long generateId(){
+        return new java.util.Date().getTime();
     }
 
 
@@ -58,6 +36,20 @@ public class Orders implements OrdersDAO {
     }
 
 
+    public List getAll(){
+        Session     session     = DataBase.getSession();
+        Transaction transaction = session.getTransaction();
+        List        list;
+
+        transaction.begin();
+        list = session.createQuery("FROM Orders").list();
+        transaction.commit();
+        session.close();
+
+        return list;
+    }
+
+
     public long getId(){ return this.id; }
     public void setCarId(long carId){ this.car_id = carId; }
     public long getCarId(){ return this.car_id; }
@@ -65,8 +57,8 @@ public class Orders implements OrdersDAO {
     public long getCustomerId(){ return customer_id; }
     public void setOrderDate(Date orderDate){ this.order_date = orderDate; }
     public Date getOrderDate(){ return this.order_date; }
-    public void setStatus(String status){ this.status = status; }
-    public String getStatus(){ return this.status; }
+    public void setStatusId(long statusId){ this.status_id = statusId; }
+    public long getStatusId(){ return this.status_id; }
 
 
     public Orders(){
@@ -74,12 +66,12 @@ public class Orders implements OrdersDAO {
     }
 
 
-    public Orders(long carId, long customerId, Date orderDate, String status){
+    public Orders(long carId, long customerId, Date orderDate, long statusId){
         this.id          = generateId();
         this.car_id      = carId;
         this.customer_id = customerId;
         this.order_date  = orderDate;
-        this.status      = status;
+        this.status_id   = statusId;
     }
 
 
@@ -87,8 +79,7 @@ public class Orders implements OrdersDAO {
         return "{" +
                 "\"car_id\":" + this.car_id + "," +
                 "\"customer_id\":" + this.customer_id + "," +
-                "\"date\":" + this.order_date.getTime() + "," +
-                "\"car_id\":\"" + this.status +
-                "\"}";
+                "\"date\":" + this.order_date.getTime() +
+                "}";
     }
 }

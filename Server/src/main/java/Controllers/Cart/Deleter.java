@@ -1,17 +1,31 @@
 package Controllers.Cart;
 
+import CarShop.Models.CartFactory;
+import CarShop.Models.DAO.CartDAO;
 import org.json.simple.JSONObject;
-import org.restlet.resource.Post;
+import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
 
 
 public class Deleter extends ServerResource {
-    @Post("txt")
+    @Get("txt")
     public String toString(){
-        JSONObject status = new JSONObject();
+        String stringOrderId = getAttribute("order_id");
+        long   orderId;
 
-        status.put("status", "Ok");
+        try{
+            orderId = Long.parseLong(stringOrderId);
+        } catch (NumberFormatException e){
+            return "{\"status\":\"error\"}";
+        }
 
-        return status.toJSONString();
+        CartDAO cart = CartFactory.getDAO().get(orderId);
+
+        if(cart == null)
+            return "{\"status\":\"error\"}";
+
+        cart.delete();
+
+        return "{\"status\":\"Ok\"}";
     }
 }

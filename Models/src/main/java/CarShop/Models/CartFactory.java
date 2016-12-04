@@ -9,7 +9,7 @@ public class CartFactory {
         return new Cart();
     }
 
-    public static CartDAO getDAO(long userId, long carId){
-        return new Cart(userId, carId);
+    public static CartDAO getDAO(long customerId, long carId){
+        return new Cart(customerId, carId);
     }
 }

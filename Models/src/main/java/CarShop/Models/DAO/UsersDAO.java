@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface UsersDAO {
     public void save();
+    public long getId();
     public UsersDAO getUser(String login);
     public List getAllAdmins();
     public void setLogin(String login);
