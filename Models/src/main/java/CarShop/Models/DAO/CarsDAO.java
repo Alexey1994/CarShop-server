@@ -7,6 +7,7 @@ import java.util.List;
 public interface CarsDAO {
 
     public List findCars(int  maxResults,
+                         int  startPosition,
                          long brandIds[],
                          long modelIds[],
                          long colorIds[],

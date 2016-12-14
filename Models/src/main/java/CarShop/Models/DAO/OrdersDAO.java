@@ -8,6 +8,7 @@ public interface OrdersDAO {
     public void save();
     public long getId();
     public List getAll();
+    public List getAll(long customerId);
     public void setCarId(long carId);
     public long getCarId();
     public void setCustomerId(long customerId);

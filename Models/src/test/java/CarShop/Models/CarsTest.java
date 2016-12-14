@@ -18,7 +18,7 @@ public class CarsTest {
         carsColorIds[2] = 3;
 
         CarsDAO c = new Cars();
-        c.findCars(100, carsColorIds, carsColorIds, carsColorIds, 100, 200, 200, 320, 1000, 5000, 2010, 2015, "price", "asc");
+        c.findCars(100, 0, carsColorIds, carsColorIds, carsColorIds, 100, 200, 200, 320, 1000, 5000, 2010, 2015, "price", "asc");
     }
 
 

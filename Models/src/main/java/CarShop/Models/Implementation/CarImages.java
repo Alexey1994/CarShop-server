@@ -83,9 +83,9 @@ public class CarImages implements CarImagesDAO {
 
 
     public CarImages(long carId, String image){
-        this.id = generateId();
+        this.id     = generateId();
         this.car_id = carId;
-        this.image = image;
+        this.image  = image;
     }
 
 

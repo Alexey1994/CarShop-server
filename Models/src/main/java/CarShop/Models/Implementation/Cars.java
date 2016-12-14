@@ -140,7 +140,8 @@ public class Cars implements CarsDAO {
     }
 
 
-    public List findCars(int  maxResults,
+    public List findCars(int maxResults,
+                         int startPosition,
                          long brandIds[],
                          long modelIds[],
                          long colorIds[],
@@ -156,10 +157,12 @@ public class Cars implements CarsDAO {
                          String order) {
 
         Session session = DataBase.getSession();
-        Finder finder = new Finder("FROM Cars ");
+        Finder finder = new Finder("");
         String finderQuery;
         Query dbQuery;
         List cars;
+        List pages = new ArrayList();
+        long  numPages;
 
         if(orderBy != null) {
             switch (orderBy) {
@@ -205,12 +208,23 @@ public class Cars implements CarsDAO {
                 finderQuery += " " + order;
         }
 
-        dbQuery = session.createQuery(finderQuery);
+        dbQuery = session.createQuery("FROM Cars " + finderQuery);
         dbQuery.setMaxResults(maxResults);
+        dbQuery.setFirstResult(startPosition);
+
         cars = dbQuery.list();
+
+        dbQuery = session.createQuery("SELECT count(id) FROM Cars " + finderQuery);
+        List list = dbQuery.list();
+
+        numPages = (long)list.get(0);
+
         session.close();
 
-        return cars;
+        pages.add(cars);
+        pages.add(new Long(numPages));
+
+        return pages;
     }
 
 

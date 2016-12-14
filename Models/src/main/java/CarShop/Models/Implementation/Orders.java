@@ -50,6 +50,20 @@ public class Orders implements OrdersDAO {
     }
 
 
+    public List getAll(long customerId){
+        Session     session     = DataBase.getSession();
+        Transaction transaction = session.getTransaction();
+        List        list;
+
+        transaction.begin();
+        list = session.createQuery("FROM Orders WHERE customer_id=" + customerId).list();
+        transaction.commit();
+        session.close();
+
+        return list;
+    }
+
+
     public long getId(){ return this.id; }
     public void setCarId(long carId){ this.car_id = carId; }
     public long getCarId(){ return this.car_id; }

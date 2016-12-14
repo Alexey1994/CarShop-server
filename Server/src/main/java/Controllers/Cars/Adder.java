@@ -1,9 +1,6 @@
 package Controllers.Cars;
 
-import CarShop.Models.CarBrandsFactory;
-import CarShop.Models.CarModelsFactory;
-import CarShop.Models.CarsFactory;
-import CarShop.Models.ColorsFactory;
+import CarShop.Models.*;
 import CarShop.Models.DAO.CarBrandsDAO;
 import CarShop.Models.DAO.CarModelsDAO;
 import CarShop.Models.DAO.CarsDAO;
@@ -12,17 +9,27 @@ import CarShop.Models.Implementation.CarBrands;
 import CarShop.Models.Implementation.CarModels;
 import CarShop.Models.Implementation.Cars;
 import Controllers.Users.AuthenticatorBySession;
+import org.apache.commons.io.IOUtils;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.restlet.representation.Representation;
 import org.restlet.resource.*;
+import org.yaml.snakeyaml.util.UriEncoder;
 
-import java.io.IOException;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.URL;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.commons.codec.binary.Base64;
 
 
 public class Adder extends ServerResource {
+    public static final String imagesPath = "c:/carshop/Вёрстка/images/";
 
     private JSONObject in;
 
@@ -33,6 +40,7 @@ public class Adder extends ServerResource {
     private long         carPower;
     private long         carYearOfManufacture;
     private long         carPrice;
+    private List         carImages;
 
 
     private boolean getBrand(){
@@ -159,8 +167,49 @@ public class Adder extends ServerResource {
     }
 
 
-    private void addCar(){
-        CarsFactory.getDAO(carBrand.getId(), carModel.getId(), carColor.getId(), carPower, carSpeed, carPrice, carYearOfManufacture).save();
+    private boolean getImages(){
+        JSONArray JSONimages;
+
+        try{
+            JSONimages = (JSONArray)in.get("images");
+        } catch (ClassCastException e){
+            return false;
+        }
+
+        carImages = new ArrayList();
+
+        for(int i=0; i<JSONimages.size(); ++i){
+
+            try{
+                String image = (String)JSONimages.get(i);
+                //carImages.add( URLDecoder.decode(image) );
+                carImages.add(image);
+                //System.out.println(URLDecoder.decode(image));
+            } catch (ClassCastException e){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    private void addCar() throws IOException {
+        CarsDAO car = CarsFactory.getDAO(carBrand.getId(), carModel.getId(), carColor.getId(), carPower, carSpeed, carPrice, carYearOfManufacture);
+        car.save();
+
+        for(int i=0; i<carImages.size(); ++i){
+            String     imageName = car.getId() + "_" + i;
+            FileWriter imageWriter;
+
+            imageWriter = new FileWriter(imagesPath + imageName);
+            String image = (String)carImages.get(i);
+            imageWriter.write(image);
+
+            CarImagesFactory.getDAO(car.getId(), imageName).save();
+
+            imageWriter.close();
+        }
     }
 
 
@@ -173,7 +222,8 @@ public class Adder extends ServerResource {
         JSONParser   parser     = new JSONParser();
 
         try {
-            in = (JSONObject) parser.parse(URLDecoder.decode( params.getText() ));
+            //in = (JSONObject) parser.parse(URLDecoder.decode( params.getText() ));
+            in = (JSONObject) parser.parse(params.getText());
         }catch (ParseException e){
             return "{\"status\":\"error\"}";
         } catch (IOException e){
@@ -182,7 +232,7 @@ public class Adder extends ServerResource {
             return "{\"status\":\"error\"}";
         }
 
-        if(!getBrand() || !getModel() || !getColor() || !getSpeed() || !getPower() || !getYearOfManufacture() || !getPrice())
+        if(!getBrand() || !getModel() || !getColor() || !getSpeed() || !getPower() || !getYearOfManufacture() || !getPrice() || !getImages())
             return "{\"status\":\"error\"}";
 
         addCar();

@@ -29,7 +29,7 @@ public class Finder extends ServerResource {
 
     private String  orderBy;
     private String  order;
-    private long    page;
+    private int     page;
     private long    minPower;
     private long    maxPower;
     private long    minSpeed;
@@ -189,7 +189,7 @@ public class Finder extends ServerResource {
 
     private void getPageNumber(){
         try{
-            page = Long.parseLong((String)in.get("current_page")) - 1;
+            page = Integer.parseInt((String)in.get("current_page")) - 1;
 
             if(page < 0)
                 page = 0;
@@ -340,34 +340,37 @@ public class Finder extends ServerResource {
 
 
     private String getCars(){
-        List     cars         = new Cars().findCars(numPagesOnPage * 9999,
-                                                    brandIds,
-                                                    modelIds,
-                                                    colorIds,
-                                                    minPower,
-                                                    maxPower,
-                                                    minSpeed,
-                                                    maxSpeed,
-                                                    minPrice,
-                                                    maxPrice,
-                                                    minYearOfManufacture,
-                                                    maxYearOfManufacture,
-                                                    orderBy,
-                                                    order);
-        int      startElement = (int)page * numPagesOnPage;
+        List pages = CarsFactory.getDAO().findCars(
+                numPagesOnPage,
+                page * numPagesOnPage,
+                brandIds,
+                modelIds,
+                colorIds,
+                minPower,
+                maxPower,
+                minSpeed,
+                maxSpeed,
+                minPrice,
+                maxPrice,
+                minYearOfManufacture,
+                maxYearOfManufacture,
+                orderBy,
+                order);
+
+        List     cars = (List)pages.get(0);
+        Long     numPages = (Long)pages.get(1);
         CarsDAO  car;
         String   result;
-        int      i;
 
-        result = "{\"pages\":" + (cars.size() / numPagesOnPage + 1)  + ", \"result\":[";
+        result = "{\"pages\":" + (numPages / numPagesOnPage + 1)  + ", \"result\":[";
 
-        for(i=startElement; i<cars.size() - 1 && i < startElement + numPagesOnPage - 1; i++) {
-            car = (Cars)cars.get(i);
+        for(int i=0; i<cars.size() - 1; ++i) {
+            car = (CarsDAO) cars.get(i);
             result += car.toString() + ",";
         }
 
-        if(i < cars.size()) {
-            car = (Cars) cars.get(i);
+        if(cars.size() > 0) {
+            car = (CarsDAO) cars.get( cars.size() - 1 );
             result += car.toString();
         }
 

@@ -14,6 +14,7 @@ public class Urls {
         host.attach("/find_cars",                           Controllers.Cars.Finder.class);
         host.attach("/get_car/{car_id}",                    Controllers.Cars.Getter.class);
         host.attach("/add_car",                             Controllers.Cars.Adder.class);
+        host.attach("/delete_car",                          Controllers.Cars.Deleter.class);
         host.attach("/get_cart",                            Controllers.Cart.Getter.class);
         host.attach("/add_product_to_cart",                 Controllers.Cart.Adder.class);
         host.attach("/remove_product_from_cart/{order_id}", Controllers.Cart.Deleter.class);
@@ -22,6 +23,8 @@ public class Urls {
         host.attach("/get_models/{brand}",                  Controllers.Models.Getter.class);
         host.attach("/get_colors",                          Controllers.Colors.Getter.class);
         host.attach("/get_orders",                          Controllers.Orders.Getter.class);
+        host.attach("/save_image",                          Controllers.Orders.Getter.class);
+        host.attach("/orders_history.csv",                  Controllers.Orders.HistoryGetter.class);
     }
 
 }
